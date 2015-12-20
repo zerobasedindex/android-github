@@ -35,10 +35,6 @@ android {
 
         }
     }
-
-    dataBinding {
-        enabled = true
-    }
 }
 
 final DAGGER_VERSION = '2.0'

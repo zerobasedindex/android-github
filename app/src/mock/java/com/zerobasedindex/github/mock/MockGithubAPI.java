@@ -20,7 +20,7 @@ public class MockGithubAPI implements GithubAPI {
     public Observable<List<Repo>> getRepos(@Path("user") String user) {
         List<Repo> repos = new ArrayList<>(100);
         for (int i = 0; i < 100; i++) {
-            repos.add(new Repo(i, "Test Repo " + (i+1), "This is my desc.", new Owner("TestOwner", "https://avatars2.githubusercontent.com/u/66577?v=3&s=400")));
+            repos.add(new Repo(i, "Test Repo " + i, "This is my desc.", new Owner("TestOwner", "https://avatars2.githubusercontent.com/u/66577?v=3&s=400")));
         }
         return Observable.just(repos);
     }

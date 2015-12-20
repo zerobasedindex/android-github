@@ -4,11 +4,15 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.zerobasedindex.github.databinding.ItemCommitBinding;
+import com.zerobasedindex.github.R;
 import com.zerobasedindex.github.model.FullCommit;
 
 import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Copyright 2015 Cody Henthorne
@@ -24,7 +28,7 @@ public class CommitsAdapter extends BaseAdapter<FullCommit> {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new CommitViewHolder(ItemCommitBinding.inflate(layoutInflater, parent, false));
+        return new CommitViewHolder(layoutInflater.inflate(R.layout.item_commit, parent, false));
     }
 
     @Override
@@ -32,18 +36,25 @@ public class CommitsAdapter extends BaseAdapter<FullCommit> {
         ((CommitViewHolder)holder).bind(list.get(position));
     }
 
-    private class CommitViewHolder extends RecyclerView.ViewHolder {
-        private final ItemCommitBinding repoBinding;
-        private final View rootView;
+    @Override
+    public long getItemId(int position) {
+        return list.get(position).getSha().hashCode();
+    }
 
-        public CommitViewHolder(ItemCommitBinding repoBinding) {
-            super(repoBinding.getRoot());
-            rootView = repoBinding.getRoot();
-            this.repoBinding = repoBinding;
+    class CommitViewHolder extends RecyclerView.ViewHolder {
+        private final View rootView;
+        @Bind(R.id.item_commit_sha) TextView sha;
+        @Bind(R.id.item_commit_message) TextView message;
+
+        public CommitViewHolder(View rootView) {
+            super(rootView);
+            this.rootView = rootView;
+            ButterKnife.bind(this, rootView);
         }
 
         public void bind(FullCommit commit) {
-            repoBinding.setFullCommit(commit);
+            sha.setText(commit.getSha());
+            message.setText(commit.getCommit().getMessage());
             if (repoListener != null) {
                 rootView.setOnClickListener(v -> repoListener.click(commit));
             }

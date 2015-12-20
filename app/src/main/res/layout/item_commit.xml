@@ -1,30 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <data>
-        <variable name="fullCommit" type="com.zerobasedindex.github.model.FullCommit"/>
-    </data>
-
-    <LinearLayout
-        android:orientation="vertical"
+    <TextView
+        android:id="@+id/item_commit_sha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:padding="16dp">
+        android:textStyle="bold"
+        tools:text="Repo Name" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="@{fullCommit.sha}"
-            tools:text="Repo Name"/>
+    <TextView
+        android:id="@+id/item_commit_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Repo Desc" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{fullCommit.commit.message}"
-            tools:text="Repo Desc"/>
-
-    </LinearLayout>
-</layout>
+</LinearLayout>

@@ -1,32 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:padding="16dp">
 
-    <data>
-        <variable name="repo" type="com.zerobasedindex.github.model.Repo"/>
-    </data>
-
-    <LinearLayout
-        android:orientation="vertical"
+    <TextView
+        android:id="@+id/item_repo_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:padding="16dp">
+        android:textStyle="bold"
+        tools:text="Repo Name"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="@{repo.name}"
-            tools:text="Repo Name"/>
+    <TextView
+        android:id="@+id/item_repo_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:ellipsize="end"
+        tools:text="Repo Desc"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:ellipsize="end"
-            android:text="@{repo.description}"
-            tools:text="Repo Desc"/>
-
-    </LinearLayout>
-</layout>
+</LinearLayout>

@@ -17,7 +17,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.not;
 
 /**
  * Copyright 2015 Cody Henthorne
@@ -32,8 +31,9 @@ public class MainActivityTest {
     public void today() {
 
         onView(withId(R.id.recyclerView))
-                .perform(RecyclerViewActions.scrollTo(withText("Test Repo 100")))
-                .check(matches(hasDescendant(allOf(isEnabled(), withText("Test Repo 100")))));
+                .perform(RecyclerViewActions.scrollTo(hasDescendant(withText("Test Repo 99"))))
+                .check(matches(hasDescendant(allOf(isEnabled(), withText("Test Repo 99")))))
+                .check(matches(hasDescendant(allOf(isEnabled(), withText("This is my desc.")))));
 
 
 //        onView(withId(R.id.recyclerView))
