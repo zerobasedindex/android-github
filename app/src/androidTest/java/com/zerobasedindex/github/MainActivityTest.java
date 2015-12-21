@@ -28,7 +28,7 @@ public class MainActivityTest {
     public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class, true, true);
 
     @Test
-    public void today() {
+    public void hasLastElement() {
 
         onView(withId(R.id.recyclerView))
                 .perform(RecyclerViewActions.scrollTo(hasDescendant(withText("Test Repo 99"))))

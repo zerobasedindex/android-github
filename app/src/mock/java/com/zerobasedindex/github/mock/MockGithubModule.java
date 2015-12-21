@@ -1,8 +1,7 @@
 package com.zerobasedindex.github.mock;
 
-import android.util.Log;
-
 import com.zerobasedindex.github.data.GithubAPI;
+import com.zerobasedindex.github.data.GithubDM;
 
 import javax.inject.Singleton;
 
@@ -19,6 +18,12 @@ public class MockGithubModule {
     @Provides
     public GithubAPI provideGithubAPI() {
         return new MockGithubAPI();
+    }
+
+    @Singleton
+    @Provides
+    public GithubDM provideGithubDM(GithubAPI githubAPI) {
+        return new MockGithubDM(githubAPI);
     }
 
 }

@@ -13,15 +13,13 @@ import rx.schedulers.Schedulers;
 /**
  * Copyright 2015 Cody Henthorne
  */
-@Singleton
 public class GithubDM {
 
     private GithubAPI githubApi;
 
     private List<Repo> repos;
 
-    @Inject
-    GithubDM(GithubAPI githubAPI) {
+    public GithubDM(GithubAPI githubAPI) {
         this.githubApi = githubAPI;
     }
 

@@ -12,7 +12,7 @@ public class GithubApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        githubComponent = Components.buildGithubComponent();
+        githubComponent = Components.buildGithubComponent(this);
     }
 
     public GithubComponent getGithubComponent() {

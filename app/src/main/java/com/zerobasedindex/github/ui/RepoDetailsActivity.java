@@ -23,6 +23,8 @@ import rx.android.schedulers.AndroidSchedulers;
 
 public class RepoDetailsActivity extends BaseActivity {
 
+    public static final String REPO_ID_EXTRA = "repo_id";
+
     @InjectExtra("repo_id") long repoId;
 
     @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbar;
@@ -31,23 +33,24 @@ public class RepoDetailsActivity extends BaseActivity {
     @Bind(R.id.recyclerView) RecyclerView recyclerView;
 
     @Inject GithubDM githubDM;
+    @Inject Picasso picasso;
 
     private Repo repo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_repo_details);
+        super.setContentView(R.layout.activity_repo_details);
         getGithubApplication().getGithubComponent().inject(this);
 
         repo = githubDM.getRepo(repoId);
 
         super.setSupportActionBar(toolbar);
         super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        super.setTitle(repo.getName());
         collapsingToolbar.setTitle(repo.getName());
 
-        Picasso.with(this)
-                .load(repo.getOwner().getAvatarUrl())
+        picasso.load(repo.getOwner().getAvatarUrl())
                 .into(backdropImg);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

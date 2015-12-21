@@ -1,6 +1,7 @@
-package com.zerobasedindex.github.network;
+package com.zerobasedindex.github.mock;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -16,15 +17,16 @@ import dagger.Provides;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.RxJavaCallAdapterFactory;
+import retrofit.mock.NetworkBehavior;
 
 /**
  * Copyright 2015 Cody Henthorne
  */
 @Module
-public class NetworkModule {
+public class MockNetworkModule {
     private String baseUrl;
 
-    public NetworkModule(String baseUrl) {
+    public MockNetworkModule(String baseUrl) {
         this.baseUrl = baseUrl;
     }
 
@@ -61,7 +63,11 @@ public class NetworkModule {
     @Singleton
     Picasso providePicasso(Application app, OkHttpClient client) {
         return new Picasso.Builder(app)
-                .downloader(new OkHttpDownloader(client))
+                .addRequestHandler(new MockRequestHandler(NetworkBehavior.create(), app.getAssets()))
+                .listener((picasso, uri, exception) -> {
+                    Log.e("CODY", "Error while loading image " + uri);
+                    Log.e("CODY", Log.getStackTraceString(exception));
+                })
                 .build();
     }
 }

@@ -15,4 +15,10 @@ public class GithubModule {
         return retrofit.create(GithubAPI.class);
     }
 
+    @Singleton
+    @Provides
+    public GithubDM provideGithubDM(GithubAPI githubAPI) {
+        return new GithubDM(githubAPI);
+    }
+
 }
